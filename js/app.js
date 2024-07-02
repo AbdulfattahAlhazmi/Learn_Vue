@@ -60,7 +60,20 @@ const app = Vue.createApp({
         second: function(v){
             this.minute = v /60
             console.log('Run Seconds')
+        },
+        books: {
+            handler() {
+                this.saveBooks();
+            },
+            deep: true
         }
     },
 }).mount('#app')
 
+/*
+CODE EXPLAINED:
+
+The watch property in Vue allows you to react to changes in the data.
+Here, it watches for changes in the books array and calls saveBooks whenever books changes.
+The deep: true option ensures that nested changes within the array are also detected.
+*/
