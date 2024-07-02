@@ -6,8 +6,46 @@ const app = Vue.createApp({
         return{
             hour: 0,
             minute: 0,
-            second:0
+            second:0,
+            newBookTitle: '',
+            books: JSON.parse(localStorage.getItem('books')) ||[
+                {
+                    title: 'سير أعلام النبلاء',
+                    read: false
+                },
+                {
+                    title: 'Discovering Statistics',
+                    read: false
+                },
+                {
+                    title: 'القرآن الكريم - سورة البقرة',
+                    read: false
+                }
+            ],
         }
+    },
+    methods:{
+        toggleRead(book){
+            book.read = !book.read
+        },
+        addBook(){
+            if(this.newBookTitle.trim() !== ''){
+                this.books.push({
+                    title: this.newBookTitle,
+                    read: false 
+                });
+            }
+            
+            this.newBookTitle = '';
+            this.saveBooks();
+        },
+        saveBooks() {
+            //To save books in web browser's localStorage
+            localStorage.setItem('books', JSON.stringify(this.books));
+        }
+    },
+    computed:{
+
     },
     watch:{
         hour: function(v){

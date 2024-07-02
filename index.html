@@ -3,17 +3,30 @@
 <head>
     <title>Learn Vue</title>
     <script src="js/vue.global.js"></script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <h1>First App Using Vue js</h1>
-    <div id="app">
+    <h1>Learn Vue JS</h1>
     <!-- START OF VUE JS APP    -->
-        <label>Hours</label>
-        <input type="text" v-model="hour">
-        <label>Minutes</label>
-        <input type="text" v-model="minute">
-        <label>Seconds</label>
-        <input type="text" v-model="second">
+    <div id="app">
+        <fieldset id="Directives">
+            <legend>Directives and Methods</legend>
+            <input type="text" placeholder="Insert Book's Title" v-model="newBookTitle" autofocus>
+            <button @click="addBook">Save</button>
+            <ul>
+                <li v-for="book in books" v-bind:class="{completed: book.read}" @click="toggleRead(book)">
+                    <h3>{{book.title}}</h3>
+                    <p>{{book.read}}</p>
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset id="Watchers">
+            <legend>Watchers</legend>
+            <label>Hours</label><input type="text" v-model="hour">
+            <label>Minutes</label><input type="text" v-model="minute">
+            <label>Seconds</label><input type="text" v-model="second">
+        </fieldset>
+            
 
     <!-- END OF VUE JS APP -->
     </div>
