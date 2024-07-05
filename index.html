@@ -15,8 +15,8 @@
             <button @click="addBook">Save</button>
             <ul>
                 <li v-for="book in books" v-bind:class="{completed: book.read}" @click="toggleRead(book)">
-                    <h3>{{book.title}}</h3>
-                    <p>{{book.read}}</p>
+                    <p>{{book.title}}</p>
+                    <span>{{book.read}}</span>
                 </li>
             </ul>
         </fieldset>

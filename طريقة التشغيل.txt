@@ -1,0 +1,6 @@
+Use live server on vs code
+
+OR
+
+1. Run npm install -g serve [If the serve is not installed yet on you sys]
+2. Run the project using `serve` command form the project
