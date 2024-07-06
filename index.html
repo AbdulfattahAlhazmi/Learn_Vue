@@ -11,10 +11,10 @@
     <div id="app">
         <fieldset id="Directives">
             <legend>Directives and Methods</legend>
-            <input type="text" placeholder="Insert Book's Title" v-model="newBookTitle" autofocus>
-            <button @click="addBook">Save</button>
+            <input type="text" placeholder="Insert Book's Title .. Then Press Enter .. To DELETE a book press 'CTRL KEY' + 'Left Click'" v-model="newBookTitle" @keyup.enter="addBook" autofocus>
+            <!-- <button @click="addBook">Save</button> -->
             <ul>
-                <li v-for="book in books" v-bind:class="{completed: book.read}" @click="toggleRead(book)">
+                <li v-for="(book, index) in books" :key='index' v-bind:class="{completed: book.read}" @click="toggleRead(book)" @click.ctrl="deleteBook(index)">
                     <p>{{book.title}}</p>
                     <span>{{book.read}}</span>
                 </li>

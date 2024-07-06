@@ -1,74 +1,77 @@
-const {createApp, defineComponent} = Vue
-
+const { createApp, defineComponent } = Vue;
 
 const app = Vue.createApp({
-    data(){
-        return{
-            hour: 0,
-            minute: 0,
-            second:0,
-            newBookTitle: '',
-            books: JSON.parse(localStorage.getItem('books')) ||[
-                {
-                    title: 'سير أعلام النبلاء',
-                    read: false
-                },
-                {
-                    title: 'Discovering Statistics',
-                    read: false
-                },
-                {
-                    title: 'القرآن الكريم - سورة البقرة',
-                    read: false
-                }
-            ],
-        }
-    },
-    methods:{
-        toggleRead(book){
-            book.read = !book.read
+  data() {
+    return {
+      hour: 0,
+      minute: 0,
+      second: 0,
+      newBookTitle: "",
+      books: JSON.parse(localStorage.getItem("books")) || [
+        {
+          title: "سير أعلام النبلاء",
+          read: false,
         },
-        addBook(){
-            if(this.newBookTitle.trim() !== ''){
-                this.books.push({
-                    title: this.newBookTitle,
-                    read: false 
-                });
-            }
-            
-            this.newBookTitle = '';
-            this.saveBooks();
+        {
+          title: "Discovering Statistics",
+          read: false,
         },
-        saveBooks() {
-            //To save books in web browser's localStorage
-            localStorage.setItem('books', JSON.stringify(this.books));
-        }
+        {
+          title: "القرآن الكريم - سورة البقرة",
+          read: false,
+        },
+      ],
+    };
+  },
+  methods: {
+    toggleRead(book) {
+      book.read = !book.read;
     },
-    computed:{
+    addBook() {
+      if (this.newBookTitle.trim() !== "") {
+        this.books.push({
+          title: this.newBookTitle,
+          read: false,
+        });
+      }
 
+      this.newBookTitle = "";
+      this.saveBooks();
     },
-    watch:{
-        hour: function(v){
-            this.minute = v *60
-            console.log('Run Hours')
-        },
-        minute: function(v){
-            this.hour = v /60
-            this.second = v * 60
-            console.log('Run Minutes')
-        },
-        second: function(v){
-            this.minute = v /60
-            console.log('Run Seconds')
-        },
-        books: {
-            handler() {
-                this.saveBooks();
-            },
-            deep: true
-        }
+    deleteBook(index) {
+      if (confirm(`Are you sure to DELETE this book?`)) {
+        this.books.splice(index, 1);
+        this.saveBooks();
+      }
     },
-}).mount('#app')
+    saveBooks() {
+      //To save books in web browser's localStorage
+      localStorage.setItem("books", JSON.stringify(this.books));
+    },
+  },
+  computed: {},
+  watch: {
+    hour: function (v) {
+      this.minute = v * 60;
+      console.log("Run Hours");
+    },
+    minute: function (v) {
+      this.hour = v / 60;
+      this.second = v * 60;
+      console.log("Run Minutes");
+    },
+    second: function (v) {
+      this.minute = v / 60;
+      console.log("Run Seconds");
+    },
+    books: {
+      handler() {
+        this.saveBooks();
+      },
+      deep: true,
+    },
+  },
+}).mount("#app");
 
 /*
 CODE EXPLAINED:
